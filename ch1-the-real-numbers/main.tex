@@ -1,0 +1,269 @@
+\documentclass[12pt]{article}
+
+% --------------------------------------------------
+% PACKAGES
+% --------------------------------------------------
+\usepackage[margin=1in]{geometry} % Adjust margins
+\usepackage{amsmath, amssymb, amsthm} % Math typesetting
+\usepackage{enumerate} % For customized lists
+\usepackage{hyperref}  % Optional: clickable references/links
+\usepackage{biblatex}
+\bibliography{references} 
+% --------------------------------------------------
+% THEOREM STYLES & NEW ENVIRONMENTS
+% --------------------------------------------------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+% Custom environment for Problems
+\newenvironment{problem}[1]{
+    \vspace{1em}
+    \noindent
+    \textbf{Problem #1.} 
+}{
+    \vspace{1em}
+}
+
+% Custom environment for Solutions (ends with a box)
+\newenvironment{solution}{
+    \noindent
+    \textbf{Solution.}\\
+}{
+    \quad \hfill $\square$
+    \vspace{1em}
+}
+
+% --------------------------------------------------
+% DOCUMENT INFO
+% --------------------------------------------------
+\title{The Real Numbers: Cantor}
+
+\date{\today}
+
+% --------------------------------------------------
+% BEGIN DOCUMENT
+% --------------------------------------------------
+\begin{document}
+
+\maketitle
+
+\noindent 
+
+\bigskip
+
+% --------------------------------------------------
+% PART A
+% --------------------------------------------------
+
+\begin{problem}{(Week 2, 1.3.7)}
+    Prove that if \(a\) is an upper bound for \(A\), and if \(a\) is also an element of \(A\), 
+    then it must be that \(a = \sup A\).
+\end{problem}
+
+\begin{solution}
+    % Write your revised solution here.
+    Let $s = supA$. $a$ is an upper bound for A and by definition $1.3.2$ $(ii)$ \cite{abbott2015understanding} it follows that
+    $s \leq a$. However, since s is also an upper bound, definition $1.3.1$ \cite{abbott2015understanding} implies that $x \leq s$ $\forall x \in A$. We know $a \in A$, then $a \leq s$. The two inequalities are satisfied only if $s=a$. Hence $a = supA$.
+
+\end{solution}
+
+\begin{problem}{(Week 3, 1.6.1)}
+    Show that $(0, 1)$ is uncountable if and only if $\mathbb{R}$ is uncountable. 
+\end{problem}
+
+\begin{solution}
+    % Write your revised solution here.
+    First I will show that the two sets have the same cardinality - $(0, 1) \sim \mathbb{R}$. By definition $1.5.2$ \cite{abbott2015understanding} the set $(0, 1)$ has the same cardinality as $\mathbb{R}$ if there exists a mapping $f:(0, 1) \rightarrow{\mathbb{R}} $ that is bijective. By definition $1.5.1$ \cite{abbott2015understanding} the function $f:(0, 1) \rightarrow{\mathbb{R}} $ is a bijection if $(i)$ for any two elements $a_1, a_2 \in (0, 1)$ implies $f(a_1) \neq f(a_2)$ in $\mathbb{R}$ (injection) and $(ii)$ given any $b \in \mathbb{R}$, $\exists a \in (0, 1)$ s.t. $f(a)=b$ (surjection). One such function is $f(x) = \frac{2x-1}{x(x-1)}$ because we want two vertical asymptotes at $0$ and $1$ and symmetry at the middle of the interval which means root at $0.5$. % MAYBE PLOT LATER 
+    
+    (i) Injection: 
+    Assume that $f(x_1)=f(x_2)$:
+    $$\frac{2x_1-1}{x_1(x_1-1)} = \frac{2x_2-1}{x_2(x_2-1)}.$$
+        This is equivalent to:
+    $$x_2(2x_1-1)(x_2-1) = x_1(x_1-1)(2x_2-1)$$
+    $$2x_2^2x_1-2x_1x_2 -x_2^2+x_2= 2x_1^2x_2-2x_1x_2 -x_1^2+x_1$$
+    $$2x_2^2x_1-2x_1x_2 -x_2^2+x_2= 2x_1^2x_2-2x_1x_2 -x_1^2+x_1$$
+    $$2x_2^2x_1-x_2^2+x_2= 2x_1^2x_2-x_1^2+x_1$$
+    $$2x_2^2x_1 - 2x_1^2x_2 +x_2 - x_1 =  x_2^2-x_1^2$$
+    $$2x_2x_1(x_2 - x_1) +(x_2 - x_1) - (x_2-x_1)(x_2+x_1)= 0$$
+    $$(x_2 - x_1)(2x_2x_1 +1 - x_2 - x_1)= 0$$
+    Here, one obvious solution is $x_2=x_1$. To prove the injection, we have to show that there are no solutions that satisfy the following for values of $x_1, x_2 \in (0, 1)$:
+    $$2x_1x_2 +1 - x_1 - x_2= 0.$$
+    This is equivalent to: 
+    $$x_2 = \frac{x_1-1}{2x_1-1}.$$
+    
+    Let's look at the following cases and show that if $x_1 \in(0,1)$ it is impossible for $x_2$ to be within that interval as well.
+    
+    Case 1: $\frac{1}{2}<x_1<1$. Thus, $-\frac{1}{2}<x_1-1<0$. $1<2x_1<2$ and $1-1<2x_1-1<2-1$. Hence, the numerator is strictly negative and the denominator is strictly positive. This means $x_2$ must be negative and it is not between $(0, 1)$. 
+    
+    Case 2: $0<x_1<\frac{1}{2}$. Now let's show that $\frac{x_1-1}{2x_1-1}$ is above 1 for every $0<x_1<\frac{1}{2}$:
+    $$\frac{x_1-1}{2x_1-1} > 1$$
+    $$\frac{x_1-1}{2x_1-1} - \frac{2x_1-1}{2x_1-1}> 0 $$
+    $$\frac{x_1-1 - (2x_1-1)}{2x_1-1}> 0 $$
+    $$\frac{-x_1}{2x_1-1}> 0 $$ 
+    $$\frac{x_1}{2x_1-1}< 0 $$ 
+    Solving the inequality by the sign-line method, it is satisfied only for $x_1 \in (0, \frac{1}{2})$. This means that the $x_2 >1$. 
+    Hence, we have shown that they are no solutions for the equation $2x_1x_2 +1 - x_1 - x_2= 0$ for $x_1, x_2 \in (0, 1)$. Thus, the only possible solution for $f(x_1) = f(x_2)$ for values of $x_1, x_2 \in (0, 1)$ is when $x_1=x_2$. This concludes the proof of $f$ being an injective function. 
+        
+    (ii) Surjection:
+    
+    To show the onto property of $f$, let $y \in \mathbb{R}$. We claim there is some $x \in (0,1)$ such that 
+\[
+f(x) \;=\; \frac{2x - 1}{x(x - 1)} \;=\; y.
+\]
+Rearranging the equation:
+\[
+y \;=\; \frac{2x - 1}{x(x-1)}
+\quad\Longleftrightarrow\quad
+y\, x(x-1) \;=\; 2x - 1.
+\]
+Distributing the left-hand side gives:
+\[
+y\, x^2 - y\, x \;=\; 2x - 1
+\quad\Longleftrightarrow\quad
+y\, x^2 \;-\; (y + 2)\, x \;+\; 1 \;=\; 0.
+\]
+Define the continuous polynomial function:
+\[
+G(x) \;=\; y\, x^2 - (y + 2)\,x + 1.
+\]
+We now check $G$ at $x=0$ and $x=1$:
+\[
+G(0) = 1, 
+\qquad
+G(1) = y \cdot 1^2 - (y+2)\cdot 1 + 1 = y - y - 2 + 1 = -1.
+\]
+Since $G(0) = 1 > 0$ and $G(1) = -1 < 0$ and $G$ is polynomial so it must be continuous, the Intermediate Value Theorem guarantees 
+the existence of some $c \in (0,1)$ such that $G(c) = 0$. In other words,
+\[
+G(c) 
+\;=\; 
+y\, c^2 - (y+2)\,c + 1 
+\;=\; 
+0,
+\]
+so
+\[
+y 
+\;=\; 
+\frac{2c - 1}{c(c - 1)} 
+\;=\; 
+f(c).
+\]
+Hence for any $y \in \mathbb{R}$, we found $c \in (0,1)$ with $f(c) = y$, 
+proving that $f$ is onto $\mathbb{R}$. We have shown that there exists a bijective mapping $f: (0, 1)\rightarrow{\mathbb{R}}$. This means that $(0, 1) \sim \mathbb{R}$. Then if $(0, 1)$ is uncountable, it follows that $\mathbb{R}$ is uncountable. I show in $1.5.5.b)$ that $(0, 1) \sim \mathbb{R}$ is equivalent to $\mathbb{R} \sim (0, 1)$ and thus, if $\mathbb{R}$ is uncountable, then $(0, 1)$ is uncountable.
+    
+
+\end{solution}
+
+
+
+\begin{problem}{(1.5.5)}
+\begin{enumerate}[(a)]
+    \item Why is $A\sim A$ for every set $A$?
+    \item Given sets $A$ and $B$, explain why $A\sim B$ is equivalent to asserting $B\sim A$.
+     \item For three sets $A$, $B$, and $C$, show that $A\sim B$ and $B\sim C$ implies $A\sim C$. 
+    
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\noindent
+\textbf{(a)} 
+From Definition 1.5.2 \cite{abbott2015understanding}, two sets $A$ and $B$ have the same cardinality if there is a function $f: A \to B$ that is both $1$--$1$ (injective) and onto (subjective). An obvious choice is the \emph{identity} function
+\[
+f(x) \;=\; x \quad \text{for all } x \in A.
+\]
+\begin{itemize}
+    \item Injective: 
+    Suppose $f(x_1) = f(x_2)$. Then $x_1 = x_2$, so $f$ is injective.
+    \item Surjective:
+    For each $y \in A$, we can find some $x \in A$ such that $f(x) = y$.  But if we take $x = y$, then $f(x) = x = y$. Thus $f$ is onto.
+\end{itemize}
+Hence $f$ is a bijection and $A\sim A$. 
+
+\medskip
+
+\noindent
+\textbf{(b)} 
+To show that both statements are equivalent, we need to show both directions: if $A \sim B$, then $B \sim A$ and the opposite. Let's first address the forward direction. If $A \sim B$, then $\exists f: A\rightarrow{B}$ and f is bijective. This implies that the inverse function $f^{-1}:B\rightarrow{A}$ is well defined. To show its injectivity, we assume $f^{-1}(y_1)=f^{-1}(y_2)$ for some $y_1, y_2 \in B$. We can represent it as: $x_1 = f^{-1}(y_1)=f^{-1}(y_2) = x_2$. Applying $f$ to both sides: $f(x_1) = f(x_2)$. We have defined $x_1=f^{-1}(y_1)$ and $x_2=f^{-1}(y_2)$. Thus, $f(x_1)=y_1$ and $f(x_2)=y_2$. We have shown that if $f^{-1}(y_1)=f^{-1}(y_2)$, then $y_1=y_2$. Therefore, $f^{-1}$ is injective. Since $f$ is onto, then $\forall y \in B,\; \exists x\in A$: $f(x)=y$. Applying the inverse, we get $f^{-1}(f(x))=x, \forall x \in A.$ This means that $\forall x \in A$, we can find $y \in B$. s.t. $f^{-1}(f(x))=f^{-1}(y)=x$. Hence, $f^{-1}$ is surjective. $f^{-1}$ is both onto and 1-1, then it is bijective. It follows if $A \sim B$, then $B \sim A$. For the reverse direction, if $B \sim A$, then $A \sim B$. In broader terms we have demonstrated that if $f: A \rightarrow{B}$ is bijective, then the inverse $f^{-1}: B \rightarrow{A}$ is also bijective. Let $g:B\rightarrow{A}$. By the same argument as before, the inverse function $g^{-1}:A \rightarrow{B}$ is bijective. Thus, if $B \sim A$, then $A \sim B$. Thus, the $\sim$ relation is symmetric.
+
+\medskip
+
+\noindent
+\textbf{(c)} 
+We need to show that there is a bijective function between $A$ and $C$. Let $g: A \to B$ be a bijection and $f: B \to C$ be a bijection. Then the composition is another function: $h=g \circ f : A \to C$. To show injectivity of h, assume $h(x_1)=h(x_2)$ for some $x_1, x_2 \in A$. However, $h(x)=f(g(x)) \; \forall x \in A$. Then, $h(x_1)=f(g(x_1))=h(x_2)=f(g(x_2))$. $f:A\rightarrow{B}$ is bijective and thus, injective. This implies if $f(g(x_1))=f(g(x_2))$, then $g(x_1)=g(x_2)$. Analogically, if $g(x_1)=g(x_2)$, $x_1=x_2$. Thus, we showed directly given $h(x_1)=h(x_2)$, $x_1=x_2$. The function $h:A\rightarrow{C}$ is injective. Since $f$ and $g$ are both surjective, then $\forall y \in B, \ \exists x \in A, \; \text{s.t. } g(x)=y$ and $\forall z \in C, \ \exists y \in B, \; \text{s.t. } f(y)=z$. That is, t$\forall z \in C, \ \exists x \in A, \; \text{s.t. } f(g(x))=z$. Hence, $h$ is both surjective and injective, thus bijective. Therefore, $A$ and $C$ have the same cardinality.
+\end{solution}
+
+
+\begin{problem}{(1.5.6)}
+    \begin{enumerate}[(a)] \item Give an example of a countable collection of disjoint
+open intervals.
+
+    \item Give an example of an uncountable collection of disjoint open intervals or argue that no such collection exists.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}[(a)] \item We can construct a countable collection of disjoint open intervals by taking the intervals between every two consecutive natural numbers: $$(0, 1), (1, 2), ..., (n-1, n), ...$$
+    $$I_n = (n-1, n) \; \forall n \in \mathbb{N}.$$
+    It is obvious that these intervals are non-intersecting since each interval is separated by the integers on the number line. Now, I will demonstrate formally why this collection is countable. Define \(f: \mathbb{N} \to \mathcal{S}\) by:
+    \[
+    f(n) = I_n.
+    \]
+    \begin{itemize}
+        \item Injectivity: If \(f(n) = f(m)\), then \((n-1, n) = (m-1, m)\), so \(n = m\).
+        \item Surjectivity: For every \(I_k \in \mathcal{S}\), \(f(k) = I_k\).
+    \end{itemize}
+    Since \(f\) bijectively maps \(\mathbb{N}\) to \(\mathcal{S}\): $\mathbb{N} \sim \mathcal{S} $, and from $1.5.5$ we know this is equivalent to $\mathcal{S} \sim \mathbb{N}$, then \(\mathcal{S}\) is countable.
+
+    \item Suppose such set $\mathcal{T}$ exists and $I_n$ is one element of $\mathcal{T}$. Theorem $1.4.3.$ \cite{abbott2015understanding} states that for every two real numbers $a$ and $b$ with $a < b$, there exists a rational number $r$ satisfying $a < r < b$. That is, $\exists r \in \mathbb{Q}$ s.t. $r \in I_n$. Since every interval $I_n$ in $\mathcal{T}$ contains at least one rational number, we can define a function:
+    $$f: \mathcal{T}\rightarrow{\mathbb{Q}}, f(I_n)=r_n,$$ where $r_n \in \mathbb{Q}$. The function is injective because no two disjoint intervals can contain the same rational number. Since $\mathbb{Q}$ is countable, the image $f(\mathcal{T})$ is a subset of $\mathbb{Q}$, then according to Theorem $1.5.7$ \cite{abbott2015understanding} $f(\mathcal{T})$ is also countable. By the definition of an injective function, $\mathcal{T}$ must also be countable. This contradicts the initial supposition that $\mathcal{T}$ is uncountable. Therefore, there is no uncountable collection of disjoint open intervals in $\mathbb{R}$.
+
+\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}{(1.6.7)}
+Return to the particular functions constructed in Exercise 1.6.6 and 
+construct the subset \(B\) that results using the preceding rule. 
+In each case, note that \(B\) is not in the range of the function used.
+\end{problem}
+
+\begin{solution}
+Looking at the functions from $1.6.6.a)$ we have the set $A = \{a, b, c\}$ and the power set $P(A)$. The two injective mappings are $f:A\rightarrow{P(A)}$ for which $f(a)=\{a\}, f(b)=\{b\}, f(c)=\{c\}$ and $g:A\rightarrow{P(A)}$ for which $g(a)=\{b, c\}, g(b)=\{a, c\}, g(c)=\{a, b\}$. Constructing the set $B=\{a \in A:a \notin f(a)\}$ for $f$ would be $B=\emptyset$, because $a \in f(a)=\{a\}$ and the same for $b$ and $c$. However, looking at the mapping $g$, $a \notin g(a)=\{b, c\}$,  $b \notin g(b)=\{a, c\}$, $c \notin g(c)=\{a, b\}$. Hence, $B=\{a, b, c\}$.
+In $1.6.6.b)$ we are given the set $C=\{1, 2, 3, 4\}$ and an example of a 1-1 map $h:C\rightarrow{P(C)}$ is: $$h(1) = \{1\}, 
+h(2) = \{1, 3\}, h(3) = \{4\}, h(4) = \{1, 2, 3, 4\}.$$ The set $B$ in this case is $B=\{2, 3\}$, because $2 \notin h(2)$ and $3 \notin h(3)$.
+\end{solution}
+
+\begin{problem}{(1.6.8)}
+\begin{enumerate}[(a)] \item First, show that the case \(a' \in B\) leads to a contradiction.
+    \item Now, finish the argument by showing that the case \(a' \notin B\) 
+          is equally unacceptable.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[(a)] \item  Since we have assumed that our function $f: A\rightarrow{P(A)}$ is onto and $B = \{a \in A: a \notin f(a)\}$, then $B \subset A$. There must be some $a' \in A, \; s.t. \; f(a')=B$. If $a' \in B$, then by definition of $B$, $a' \notin f(x)=B$. We get the contradiction that $a'$ is not an element of $B$, which is a contradiction. 
+
+
+    \item Assume $a' \notin B$, then $a' \in f(x)=B$, then we get the contradiction that $a'$ must be an element of $B$ which contradicts the supposition. Therefore, $f: A \rightarrow{P(A)}$ is not surjective.
+\end{enumerate}
+\end{solution}
+
+
+\printbibliography
+% --------------------------------------------------
+% END DOCUMENT
+% --------------------------------------------------
+\end{document}
+
